@@ -12,6 +12,7 @@ if __name__ == '__main__':
     dico = load_dico('../manulex.json')
     decipherable_words = find_decipherable_words_above_threshold(dico,
                                                                  args.mastered_relations,
-                                                                 threshold=args.decipherability_threshold)
+                                                                 threshold=args.decipherability_threshold,
+                                                                 include_words_with_muted_letters=False)
 
     print(decipherable_words)

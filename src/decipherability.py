@@ -1,4 +1,4 @@
-def find_decipherable_words_above_threshold(Dico, threshold, mastered_relations, include_words_with_muted_letters=False):
+def find_decipherable_words_above_threshold(Dico, mastered_relations, threshold=None, include_words_with_muted_letters=False):
     partially_decipherable_words = {}
     for word in Dico:
         percentage = compute_decipherability_percentage(Dico[word], mastered_relations, include_words_with_muted_letters)
@@ -7,7 +7,7 @@ def find_decipherable_words_above_threshold(Dico, threshold, mastered_relations,
     return partially_decipherable_words
 
 def compute_decipherability_percentage(word_relations, mastered_relations, ignore_muted_letters=False):
-    if not include_muted_letters:
+    if not ignore_muted_letters:
         for relation in word_relations:
             if relation[-1] == '#':
                 word_relations.remove(relation)

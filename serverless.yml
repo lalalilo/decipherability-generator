@@ -13,6 +13,7 @@ functions:
       - http:
           path: 'find_mastered_words'
           method: get
+          cors: true
 
   decipherability_text:
     handler: handler.decipherability_text
@@ -20,6 +21,7 @@ functions:
       - http:
           path: 'decipherability_score'
           method: get
+          cors: true
 
   find_mastered_words_with_LO:
     handler: handler.find_mastered_words_with_LO
@@ -27,3 +29,4 @@ functions:
       - http:
           path: 'mastered_words_with_lo'
           method: get
+          cors: true

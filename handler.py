@@ -8,10 +8,11 @@ dico = load_dico('./manulex.json')
 
 def find_mastered_words(event, context):
     mastered_relations = list(
-        map(str.strip, (event["queryStringParameters"]["masteredRelations"] or '').split(','))
+        map(str.strip, (event["queryStringParameters"].get("masteredRelations") or '').split(','))
     )
 
-    threshold = float(event["queryStringParameters"]["threshold"] or 1)
+    threshold = float(event["queryStringParameters"].get("threshold") or 1)
+    include_words_with_muted_letters = event["queryStringParameters"].get("includeWordsWithMutedLetters") == 'true'
 
     decipherable_words = find_decipherable_words_above_threshold(dico,
                                                                  mastered_relations,
@@ -20,7 +21,11 @@ def find_mastered_words(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(decipherable_words)
+        "body": json.dumps(decipherable_words),
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
     }
 
     return response
@@ -36,11 +41,14 @@ def decipherability_text(event, context):
 
     response = {
         "statusCode": 200,
-        "body": decipherability
+        "body": decipherability,
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
     }
 
     return response
-
 
 def find_mastered_words_with_LO(event, context):
     mastered_relations = list(
@@ -52,7 +60,12 @@ def find_mastered_words_with_LO(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(decipherable_words)
+        "body": json.dumps(decipherable_words),
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        }
     }
 
     return response
+

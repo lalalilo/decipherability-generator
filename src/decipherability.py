@@ -31,6 +31,7 @@ def select_words_with_LO(Dico, LO):
     return words_with_LO
 
 def compute_decipherability_for_text(Dico, mastered_relations, text):
+    text = sanitize_text(text)
     split_text = text.split()
     averaged_decipherability = 0
     for word in split_text:
@@ -39,3 +40,17 @@ def compute_decipherability_for_text(Dico, mastered_relations, text):
                                                                        ignore_muted_letters=True)
 
     return averaged_decipherability/len(split_text)
+
+def rm_punctuation(text):
+    return text\
+        .replace("’", "")\
+        .replace("?", "")\
+        .replace("!", "")
+
+
+def normalize(text):
+    return text.replace('œ', 'oe').replace('æ', 'ae')
+
+
+def sanitize_text(text):
+    return normalize(rm_punctuation(text).lower())

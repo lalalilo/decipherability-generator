@@ -15,7 +15,8 @@ def find_mastered_words(event, context):
 
     decipherable_words = find_decipherable_words_above_threshold(dico,
                                                                  mastered_relations,
-                                                                 threshold=threshold)
+                                                                 threshold=threshold,
+                                                                 include_words_with_muted_letters=False)
 
     response = {
         "statusCode": 200,

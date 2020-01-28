@@ -1,10 +1,11 @@
-def find_decipherable_words_above_threshold(Dico, threshold, mastered_relations):
+def find_decipherable_words_above_threshold(Dico, mastered_relations, threshold=0.0):
     partially_decipherable_words = {}
     for word in Dico:
         percentage = compute_decipherability_percentage(Dico[word], mastered_relations)
         if percentage >= threshold:
             partially_decipherable_words[word] = percentage
     return partially_decipherable_words
+
 
 def compute_decipherability_percentage(word_relations, mastered_relations):
     word_relations_set = set(word_relations)

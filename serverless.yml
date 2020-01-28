@@ -7,9 +7,23 @@ provider:
   stage: dev
 
 functions:
-  main:
-    handler: handler.main
+  find_mastered_words:
+    handler: handler.find_mastered_words
     events:
       - http:
-          path: 'words'
+          path: 'find_mastered_words'
+          method: get
+
+  decipherability_text:
+    handler: handler.decipherability_text
+    events:
+      - http:
+          path: 'decipherability_score'
+          method: get
+
+  find_mastered_words_with_LO:
+    handler: handler.find_mastered_words_with_LO
+    events:
+      - http:
+          path: 'mastered_words_with_lo'
           method: get

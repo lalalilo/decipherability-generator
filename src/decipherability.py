@@ -1,4 +1,4 @@
-def find_decipherable_words_above_threshold(Dico, threshold, mastered_relations, include_words_with_muted_letters=False):
+def find_decipherable_words_above_threshold(Dico, mastered_relations, threshold=1.0, include_words_with_muted_letters=False):
     partially_decipherable_words = {}
     for word in Dico:
         percentage = compute_decipherability_percentage(Dico[word], mastered_relations, include_words_with_muted_letters)
@@ -29,3 +29,13 @@ def find_words_with_non_mastered_LO(Dico, LO, mastered_relations):
 def select_words_with_LO(Dico, LO):
     words_with_LO = {word: Dico[word] for word in Dico if LO in Dico[word]}
     return words_with_LO
+
+def compute_decipherability_for_text(Dico, mastered_relations, text):
+    split_text = text.split()
+    averaged_decipherability = 0
+    for word in split_text:
+        averaged_decipherability += compute_decipherability_percentage(Dico[word],
+                                                                       mastered_relations,
+                                                                       ignore_muted_letters=True)
+
+    return averaged_decipherability/len(split_text)

@@ -1,0 +1,6 @@
+{
+  "queryStringParameters": {
+    "threshold": "0.5",
+    "masteredRelations": "a-a"
+  }
+}

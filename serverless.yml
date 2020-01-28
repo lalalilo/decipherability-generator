@@ -1,0 +1,15 @@
+service: decipherability-generator
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: eu-west-1
+  stage: dev
+
+functions:
+  main:
+    handler: handler.main
+    events:
+      - http:
+          path: 'words'
+          method: get

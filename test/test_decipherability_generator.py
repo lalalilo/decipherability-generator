@@ -37,10 +37,26 @@ class DecipherabilityGeneratorTest(unittest.TestCase):
         self.assertNotIn('vin', words_with_percentages)
         self.assertEqual(1.0, words_with_percentages['chauffa'])
 
+    def test_find_decipherable_words_above_threshold_muted_letter(self):
+        dico = self._get_dico()
+        mastered_relations = ['ch-S', 'au-O', 'ff-f', 'a-a']
+        words_with_percentages = find_decipherable_words_above_threshold(dico,
+                                                                         mastered_relations,
+                                                                         threshold=1.0,
+                                                                         include_muted_letters=True)
+
+        self.assertIn('chauffa', words_with_percentages)
+        self.assertIn('chaud', words_with_percentages)
+        self.assertNotIn('chevrotement', words_with_percentages)
+        self.assertNotIn('vin', words_with_percentages)
+        self.assertEqual(1.0, words_with_percentages['chauffa'])
+        self.assertEqual(1.0, words_with_percentages['chaud'])
+
     @staticmethod
     def _get_dico():
         return {
             'chauffa': ['ch-S', 'au-O', 'ff-f', 'a-a'],
+            'chaud': ['ch-S', 'au-O', 'd-#'],
             'chevrotement': ['ch-S', 'e-*', 'v-v', 'r-R', 'o-O', 't-t', 'e-#', 'm-m', 'en-@', 't-#'],
             'vin': ['v-v', 'in-5'],
         }

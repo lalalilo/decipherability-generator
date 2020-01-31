@@ -30,3 +30,6 @@ functions:
           path: 'mastered_words_with_lo'
           method: get
           cors: true
+
+plugins:
+  - serverless-python-requirements

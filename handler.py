@@ -1,10 +1,18 @@
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 from src.decipherability import find_decipherable_words_above_threshold, compute_decipherability_for_text, \
     find_words_with_non_mastered_LO
 from src.load_dico import load_dico
 
-dico = load_dico('./manulex.json')
+dico = load_dico(
+    os.getenv("MANULEX_SPREADSHEET_ID"),
+    os.getenv("GOOGLE_REFRESH_TOKEN"),
+    os.getenv("GOOGLE_CLIENT_ID"),
+    os.getenv("GOOGLE_CLIENT_SECRET")
+)
 
 def find_mastered_words(event, context):
     mastered_relations = list(
